@@ -19,11 +19,11 @@ class Kid(models.Model):
         self.save()
 
     def __str__(self):
-        return self.child_name + ' | ' + str(Client_intake.client_id)
+        return self.child_name
 
 class Client_intake(models.Model):
     client_id = models.AutoField(primary_key=True)
-    client_date_of_birth = models.DateField(help_text="Please use the following format: <em>YYYY-MM-DD</em>.")
+    client_date_of_birth = models.DateField(help_text="Please use the following format: <em>YYYY-MM-DD</em>.", null=True, blank=True)
     client_first_name = models.CharField(max_length=20)
     client_last_name = models.CharField(max_length=20)
     client_move_in = models.DateField(help_text="Please use the following format: <em>YYYY-MM-DD</em>.")
@@ -157,7 +157,7 @@ class Client_intake(models.Model):
 
     sector_write_in = models.CharField(max_length=20, blank=True)
 
-    baseline_hire_date = models.DateField(help_text="Please use the following format: <em>YYYY-MM-DD</em>, enter 9999-99-99 if unknown")
+    baseline_hire_date = models.DateField(help_text="Please use the following format: <em>YYYY-MM-DD</em>", null=True, blank=True)
 
     HOURS_CHOICES = (
         ('NONE', 'None'),
@@ -175,7 +175,7 @@ class Client_intake(models.Model):
 
     baseline_monthly_net_income = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
 
-    baseline_credit_report = models.DateField(blank=True, null=True, help_text = 'Approximately - when was the last time client accessed a credit report?, if never, enter 9999-99-99')
+    baseline_credit_report = models.DateField(blank=True, null=True, help_text = 'Approximately - when was the last time client accessed a credit report?')
 
     baseline_credit_score = models.IntegerField(blank=True, null=True)
 
@@ -362,7 +362,7 @@ class One_month_update(models.Model):
 
     current_average_hours_per_week = models.CharField(max_length=12, choices = HOURS_CHOICES, default='UNKNOWN')
 
-    current_hourly_wage = models.DecimalField(max_digits=4, decimal_places=2, help_text='Please write just the number of dollars client makes per hour of work, 0 if unemployed, 99.99 if unknown')
+    current_hourly_wage = models.DecimalField(max_digits=4, decimal_places=2, help_text='Please write just the number of dollars client makes per hour of work, 0 if unemployed')
 
     current_monthly_gross_income = models.DecimalField(max_digits=10, decimal_places=2, help_text='please enter 999.99 if not known')
 
